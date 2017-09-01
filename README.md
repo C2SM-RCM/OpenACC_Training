@@ -1,6 +1,6 @@
 # README #
 
-This repository contains hands on Material and code examples for the Swiss Climate Summer school 2017
+This repository contains hands on material and code examples for the Swiss Climate Summer school 2017
 
 # Compile and run on Piz Daint (exampel with handsOn1)
 ```
