@@ -20,13 +20,13 @@ m_timing                timing routines
 
 # Compilation
 
-make example_<name>
+make handsOn#
 
 For example, in order to compile the serial version of the example, you
 can execute the following command:
 
-make example_serial
+make handsOn1
 
-This creates an executable example_serial/example_serial which can then
+This creates an executable handsOn1/handsOn1 which can then
 be run.
 
