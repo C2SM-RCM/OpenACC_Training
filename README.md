@@ -2,7 +2,17 @@
 
 This repository contains hands on material (slides) and code examples for openacc training
 
-# Compile and run on Piz Daint (exampel with handsOn1)
+# Compile and run on Tsa (example with handsOn1)
+```
+module load PrgEnv-pgi
+
+cd handsOn
+make COMPILER=pgi TARGET=gpu handsOn1
+srun -n 1 --time=00:02:00 -p debug ./handsOn1/handsOn1
+
+--
+
+# Compile and run on Piz Daint (example with handsOn1)
 ```
 module load daint-gpu
 module load craype-accel-nvidia60
