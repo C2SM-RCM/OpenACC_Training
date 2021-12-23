@@ -1,7 +1,7 @@
 # Makefile for OpenACC example code
 
 # Default
-COMPILER=cray
+COMPILER=pgi
 
 # Set compiler and options
 ifeq ($(COMPILER),pgi)
@@ -45,13 +45,13 @@ OBJ=main.o m_config.o m_fields.o m_io.o m_parametrizations.o m_physics.o m_setup
 
 # compile in example_name/ directory
 handsOn1:
-	@make -C $@ -f ../Makefile exe TARGET=gpu EXE=$@
+	@make -C $@ -f ../Makefile exe TARGET=$(TARGET) EXE=$@
 
 handsOn2:
-	@make -C $@ -f ../Makefile exe TARGET=gpu EXE=$@
+	@make -C $@ -f ../Makefile exe TARGET=$(TARGET) EXE=$@
 
 handsOn3:
-	@make -C $@ -f ../Makefile exe TARGET=gpu EXE=$@
+	@make -C $@ -f ../Makefile exe TARGET=$(TARGET) EXE=$@
 
 
 exe : $(OBJ)
