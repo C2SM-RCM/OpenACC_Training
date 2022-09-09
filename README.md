@@ -14,11 +14,11 @@ srun -n 1 --time=00:02:00 -p debug ./handsOn1/handsOn1
 
 ```
 module load daint-gpu
-module load PrgEnv-pgi
+module load PrgEnv-nvidia
 module load craype-accel-nvidia60
 
 cd handsOn
-make TARGET=gpu handsOn1 # or TARGET=cpu
+make TARGET=gpu COMPILER=nvidia handsOn1 # or TARGET=cpu
 srun -n 1 -p debug -A d56 -C gpu ./handsOn1/handsOn1 
 ```
 # Compile and run on Mistral

@@ -16,6 +16,18 @@ ifeq ($(COMPILER),pgi)
  endif
 endif
 
+ifeq ($(COMPILER),nvidia)
+ FC=nvfortran
+ LD=$(FC)
+ ifeq ($(TARGET),gpu) 
+  FFLAGS=-O3 -Mpreprocess -ta=nvidia
+  LFLAGS=-ta=nvidia
+ else
+  FFLAGS=-O3 -Mpreprocess -mp
+  LFLAGS=-mp
+ endif
+endif
+
 ifeq ($(COMPILER),cray)
  FC=ftn
  LD=$(FC)
