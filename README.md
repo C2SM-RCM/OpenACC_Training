@@ -14,7 +14,7 @@ srun -n 1 --time=00:02:00 -p debug ./handsOn1/handsOn1
 
 ```
 module load daint-gpu
-module load PrgEnv-nvidia
+module swap PrgEnv-cray/6.0.10 PrgEnv-nvidia 
 module load craype-accel-nvidia60
 
 cd handsOn
