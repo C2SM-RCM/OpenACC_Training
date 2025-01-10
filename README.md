@@ -38,6 +38,10 @@ cd handsOn
 make COMPILER=nvidia TARET=gpu handsOn1
 srun -n 1 --partition=debug --nodes=1 --time=0:05:00  ./handsOn1/handsOn1
 ```
+for profiling
+```console
+srun -n 1 --partition=debug --nodes=1 --time=0:05:00 nsys profile --trace openacc --output nsys-profile --cuda-memory-usage true ./example_openacc4/example_openacc4
+```
 
 The code examples are adapted from
 
