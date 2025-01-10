@@ -20,8 +20,8 @@ ifeq ($(COMPILER),nvidia)
  FC=nvfortran
  LD=$(FC)
  ifeq ($(TARGET),gpu) 
-  FFLAGS=-O3 -Mpreprocess -ta=nvidia
-  LFLAGS=-ta=nvidia
+  FFLAGS=-O3 -Mpreprocess -gpu=cc80 -acc=verystrict
+  LFLAGS=-gpu=cc80 -acc=verystrict -cuda
  else
   FFLAGS=-O3 -Mpreprocess -mp
   LFLAGS=-mp
