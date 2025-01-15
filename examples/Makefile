@@ -16,6 +16,18 @@ ifeq ($(COMPILER),pgi)
  endif
 endif
 
+ifeq ($(COMPILER),nvidia)
+ FC=nvfortran
+ LD=$(FC)
+ ifeq ($(TARGET),gpu) 
+  FFLAGS=-O3 -Mpreprocess -gpu=cc80 -acc=verystrict
+  LFLAGS=-gpu=cc80 -acc=verystrict -cuda
+ else
+  FFLAGS=-O3 -Mpreprocess -mp
+  LFLAGS=-mp
+ endif
+endif
+
 ifeq ($(COMPILER),cray)
  FC=ftn
  LD=$(FC)
@@ -41,7 +53,7 @@ endif
 OBJ=main.o m_config.o m_fields.o m_io.o m_parametrizations.o m_physics.o m_setup.o m_timing.o
 
 # Rules
-.PHONY: example_serial example_openmp example_openacc1 example_openacc2 example_openacc3 clean
+.PHONY: example_serial example_openmp example_openacc1 example_openacc2 example_openacc3 example_openacc4 clean
 
 # compile in example_name/ directory
 example_serial:
@@ -57,6 +69,9 @@ example_openacc2:
 	@make -C $@ -f ../Makefile exe TARGET=gpu EXE=$@
 
 example_openacc3:
+	@make -C $@ -f ../Makefile exe TARGET=gpu EXE=$@
+
+example_openacc4:
 	@make -C $@ -f ../Makefile exe TARGET=gpu EXE=$@
 
 exe : $(OBJ)

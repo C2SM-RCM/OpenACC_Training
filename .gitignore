@@ -1,0 +1,11 @@
+*.o
+*.mod
+examples/example_openacc1/example_openacc1
+examples/example_openacc2/example_openacc2
+examples/example_openacc3/example_openacc3
+examples/example_openacc4/example_openacc4
+examples/example_openmp/example_openmp
+examples/example_serial/example_serial
+handsOn/handsOn1/handsOn1
+handsOn/handsOn2/handsOn2
+handsOn/handsOn3/handsOn3
