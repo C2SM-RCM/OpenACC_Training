@@ -66,7 +66,7 @@ MODULE m_timing
     timertag(id) = TRIM(tag)
 
     ! start timer
-    !$acc wait
+    !$ACC WAIT
     CALL SYSTEM_CLOCK( COUNT=icountold(id) )
     
   END SUBROUTINE start_timer
@@ -96,7 +96,7 @@ MODULE m_timing
     END IF
 
    ! get current time
-   !$acc wait
+   !$ACC WAIT
    CALL SYSTEM_CLOCK( COUNT=icountnew )
 
    ! compute elapsed time

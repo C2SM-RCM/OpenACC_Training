@@ -40,7 +40,7 @@ CONTAINS
     ALLOCATE( t(nx,ny,nz), qv(nx,ny,nz) )
 
     ! allocate on the GPU
-    !$acc enter data create(t,qv)
+    !$ACC ENTER DATA CREATE(t,qv)
 
     ! initialize global fields
     DO k =1, nz
@@ -53,7 +53,7 @@ CONTAINS
     END DO
 
     ! initialize fields on the GPU
-    !$acc update device(t,qv)
+    !$ACC UPDATE DEVICE(t,qv)
 
 #ifdef _OPENACC
     ! call small kernel to initialize the GPU
@@ -78,7 +78,7 @@ CONTAINS
     ! run a small kernel before any timings to make sure
     ! the GPU is initialized
 
-    !$acc parallel loop
+    !$ACC PARALLEL LOOP
     DO i = 1, 16
       temp(i) = 1
     END DO
@@ -99,7 +99,7 @@ CONTAINS
     IMPLICIT NONE
     ! deallocate on the GPU
     
-    !$acc exit data delete(t,qv)
+    !$ACC EXIT DATA DELETE(t,qv)
 
     DEALLOCATE( t, qv )
 

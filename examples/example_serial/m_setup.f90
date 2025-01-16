@@ -70,7 +70,7 @@ CONTAINS
     ! run a small kernel before any timings to make sure
     ! the GPU is initialized
 
-    !$acc parallel loop
+    !$ACC PARALLEL LOOP
     DO i = 1, 16
       temp(i) = 1
     END DO

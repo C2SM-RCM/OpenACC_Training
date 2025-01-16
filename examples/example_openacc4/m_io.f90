@@ -28,12 +28,12 @@ MODULE m_io
     ! skip if this is not a output timestep
     IF (MOD(ntstep, nout) /= 0) RETURN
     
-    !$acc data present(qv)
+    !$ACC DATA PRESENT(qv)
 
     ! compute mean of variable qv
     qv_mean = 0.0D0
-    !$acc parallel 
-    !$acc loop gang vector collapse(3) reduction(+:qv_mean)
+    !$ACC PARALLEL 
+    !$ACC LOOP GANG VECTOR COLLAPSE(3) REDUCTION(+:qv_mean)
     DO k = 1, nz
       DO j = 1, ny
         DO i = 1, nx
@@ -41,8 +41,8 @@ MODULE m_io
         END DO
       END DO
     END DO
-    !$acc end parallel
-    !$acc end data
+    !$ACC END PARALLEL
+    !$ACC END DATA
     qv_mean = qv_mean / REAL(nx * ny * nz, KIND(qv_mean))
 
     ! echo result

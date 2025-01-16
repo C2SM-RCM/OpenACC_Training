@@ -40,7 +40,7 @@ CONTAINS
     ! allocate memory
     ALLOCATE( qc(nx,ny,nz) )
 
-    !$acc enter data create(qc)
+    !$ACC ENTER DATA CREATE(qc)
 
   END SUBROUTINE init_physics
 
@@ -51,7 +51,7 @@ CONTAINS
     IMPLICIT NONE
     
     ! deallocate memory
-    !$acc exit data delete(qc)
+    !$ACC EXIT DATA DELETE(qc)
 
     DEALLOCATE(qc)
 

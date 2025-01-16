@@ -24,11 +24,11 @@ CONTAINS
     IMPLICIT NONE
 
     INTEGER :: i,j    ! loop indices
-    !$acc data present(t,qc,qv) 
-    !$acc parallel
-    !$acc loop gang
+    !$ACC DATA PRESENT(t,qc,qv) 
+    !$ACC PARALLEL
+    !$ACC LOOP GANG
     DO j = 1,ny
-      !$acc loop vector
+      !$ACC LOOP VECTOR
       DO i = 1,nx
         ! call a first physical parametrization
         CALL saturation_adjustment(nz, i, j, t(:,:,:), qc(:,:,:), qv(:,:,:))
@@ -37,8 +37,8 @@ CONTAINS
         CALL microphysics(nz, i, j, t(:,:,:), qc(:,:,:), qv(:,:,:))
       END DO
    END DO
-   !$acc end parallel
-   !$acc end data
+   !$ACC END PARALLEL
+   !$ACC END DATA
   END SUBROUTINE physics
   !----------------------------------------------------------------------------
   ! Initialization of local physics array
@@ -49,7 +49,7 @@ CONTAINS
     ! allocate memory
     ALLOCATE ( qc(nx,ny,nz) )
 
-    !$acc enter data create(qc)
+    !$ACC ENTER DATA CREATE(qc)
     !
  END SUBROUTINE init_physics
 
@@ -60,7 +60,7 @@ CONTAINS
     IMPLICIT NONE
 
     ! deallocate memory
-    !$acc exit data delete(qc)
+    !$ACC EXIT DATA DELETE(qc)
 
     DEALLOCATE (qc)
 
