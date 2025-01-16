@@ -23,13 +23,13 @@ CONTAINS
  
     ! local variables
     REAL*8 :: qc(nx,ny,nz)   ! temporary variable used in the physics
-    !$acc data create(qc)   
+    !$ACC DATA CREATE(qc)   
     ! call a first physical parametrization
     CALL saturation_adjustment(nx, ny, nz, t, qc, qv)
 
     ! call a second physical parametrization  
     CALL microphysics(nx, ny, nz, t, qc, qv)
-    !$acc end data
+    !$ACC END DATA
   END SUBROUTINE physics
 
 END MODULE m_physics

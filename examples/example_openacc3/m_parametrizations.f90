@@ -29,10 +29,10 @@ CONTAINS
 
     ! local variables
     INTEGER :: i,j, k
-    !$acc data present(t,qv,qc)
+    !$ACC DATA PRESENT(t,qv,qc)
     ! do the computation
-    !$acc parallel
-    !$acc loop gang vector collapse(3) 
+    !$ACC PARALLEL
+    !$ACC LOOP GANG VECTOR COLLAPSE(3) 
     DO k = 1, nlev
       DO j = 1, npy
         DO i = 1, npx
@@ -41,8 +41,8 @@ CONTAINS
         END DO
       END DO
     END DO
-    !$acc end parallel
-    !$acc end data
+    !$ACC END PARALLEL
+    !$ACC END DATA
   END SUBROUTINE saturation_adjustment
 
   !----------------------------------------------------------------------------
@@ -62,22 +62,22 @@ CONTAINS
 
     ! local variables
     INTEGER :: i, j, k   ! loop indices
-    !$acc data present(t,qv,qc)
+    !$ACC DATA PRESENT(t,qv,qc)
     ! do the computation
-    !$acc parallel
-    !$acc loop seq
+    !$ACC PARALLEL
+    !$ACC LOOP SEQ
     DO k = 2, nlev
-      !$acc loop gang 
+      !$ACC LOOP GANG 
       DO j = 1, npy
-        !$acc loop vector
+        !$ACC LOOP VECTOR
         DO i = 1, npx
           qv(i, j, k) = qv(i,j,k-1) + cm1*(t(i,j,k)-cm2)**cm3
           t(i, j, k)  = t(i, j, k)*( 1.0D0 - cm4*qc(i,j,k)+qv(i,j,k) )
         END DO
       END DO
     END DO
-    !$acc end parallel
-    !$acc end data
+    !$ACC END PARALLEL
+    !$ACC END DATA
   END SUBROUTINE microphysics
 
 END MODULE m_parametrizations

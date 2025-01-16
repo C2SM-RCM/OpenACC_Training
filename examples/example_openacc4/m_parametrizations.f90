@@ -10,8 +10,8 @@ MODULE m_parametrizations
   REAL*8 ::  cs1 = 1.0D-6, cs2 = 0.02D0, cs3 = 7.2D0, cs4=0.1D0, t0=273.0D0
   REAL*8 ::  cm1 = 1.0D-6, cm2=25.0D0, cm3=0.2D0, cm4=100.0D0
 
-  !$acc declare copyin(cs1, cs2, cs3, cs4, t0)
-  !$acc declare copyin(cm1, cm2, cm3, cm4)
+  !$ACC DECLARE COPYIN(cs1, cs2, cs3, cs4, t0)
+  !$ACC DECLARE COPYIN(cm1, cm2, cm3, cm4)
 CONTAINS
 
   !----------------------------------------------------------------------------
@@ -31,7 +31,7 @@ CONTAINS
     
     ! local variables
     INTEGER :: k
-    !$acc routine seq 
+    !$ACC ROUTINE SEQ 
     ! do the computation
     DO k = 1, nlev
       qv(i,j,k) = qv(i,j,k) + cs1*EXP(cs2*( t(i,j,k)-t0 )/( t(i,j,k)-cs3) )
@@ -56,7 +56,7 @@ CONTAINS
 
     ! local variables
     INTEGER :: k   ! loop indices
-    !$acc routine seq
+    !$ACC ROUTINE SEQ
     ! do the computation
     DO k = 2, nlev
       qv(i, j, k) = qv(i, j, k-1) + cm1*(t(i, j, k)-cm2)**cm3

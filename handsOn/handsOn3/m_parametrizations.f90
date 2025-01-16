@@ -29,22 +29,22 @@ CONTAINS
 
     ! local variables
     INTEGER :: i,j, k
-    !$acc data present(t,qv,qc)
+    !$ACC DATA PRESENT(t,qv,qc)
     ! do the computation
-    !$acc parallel
-    !$acc loop
+    !$ACC PARALLEL
+    !$ACC LOOP
     DO k = 1, nlev
-      !$acc loop
+      !$ACC LOOP
       DO j = 1, npy
-        !$acc loop
+        !$ACC LOOP
         DO i = 1, npx
           qv(i,j,k) = qv(i,j,k) + cs1*EXP(cs2*( t(i,j,k)-t0 )/( t(i,j,k)-cs3) )
           qc(i,j,k) = cs4*qv(i,j,k)
         END DO
       END DO
     END DO
-    !$acc end parallel
-    !$acc end data
+    !$ACC END PARALLEL
+    !$ACC END DATA
   END SUBROUTINE saturation_adjustment
 
   !----------------------------------------------------------------------------
@@ -64,22 +64,22 @@ CONTAINS
 
     ! local variables
     INTEGER :: i, j, k   ! loop indices
-    !$acc data present(t,qv,qc)
+    !$ACC DATA PRESENT(t,qv,qc)
     ! do the computation
-    !$acc parallel
-    !$acc loop seq
+    !$ACC PARALLEL
+    !$ACC LOOP SEQ
     DO k = 2, nlev
-      !$acc loop
+      !$ACC LOOP
       DO j = 1, npy
-        !$acc loop
+        !$ACC LOOP
         DO i = 1, npx
           qv(i, j, k) = qv(i,j,k-1) + cm1*(t(i,j,k)-cm2)**cm3
           t(i, j, k)  = t(i, j, k)*( 1.0D0 - cm4*qc(i,j,k)+qv(i,j,k) )
         END DO
       END DO
     END DO
-    !$acc end parallel
-    !$acc end data
+    !$ACC END PARALLEL
+    !$ACC END DATA
   END SUBROUTINE microphysics
 
 END MODULE m_parametrizations
