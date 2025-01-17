@@ -26,6 +26,8 @@ CONTAINS
     ! print info
 #ifdef _OPENACC
     WRITE(*,"(A)") "Running with OpenACC"
+    ! call small kernel to initialize the GPU
+    CALL initialize_gpu()
 #else
     WRITE(*,"(A)") "Running without OpenACC"
 #endif
@@ -55,10 +57,6 @@ CONTAINS
     ! initialize fields on the GPU
     !$ACC UPDATE DEVICE(t,qv)
 
-#ifdef _OPENACC
-    ! call small kernel to initialize the GPU
-    CALL initialize_gpu()
-#endif
     ! initialize physics fields
     CALL init_physics()
 

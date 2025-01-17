@@ -27,6 +27,8 @@ CONTAINS
     ! print info
 #ifdef _OPENACC
     WRITE(*,"(A)") "Running with OpenACC"
+    ! call small kernel to initialize the GPU
+    CALL initialize_gpu()
 #else
     WRITE(*,"(A)") "Running without OpenACC"
 #ifdef _OPENMP
@@ -56,11 +58,6 @@ CONTAINS
         END DO
       END DO
     END DO
-
-#ifdef _OPENACC
-    ! call small kernel to initialize the GPU
-    CALL initialize_gpu()
-#endif
 
     CALL end_timer( itiminit )
 
