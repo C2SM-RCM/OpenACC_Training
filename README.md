@@ -45,7 +45,7 @@ module load nvhpc
 cd handsOn
 make COMPILER=nvidia TARGET=gpu handsOn1
 srun -n 1 --partition=debug --nodes=1 --time=0:05:00  ./handsOn1/handsOn1
-
+```
 for profiling
 ```console
 srun -n 1 --partition=debug --nodes=1 --time=0:05:00 nsys profile --trace openacc --output nsys-profile --cuda-memory-usage true ./example_openacc4/example_openacc4
